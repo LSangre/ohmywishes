@@ -50,6 +50,15 @@ def wishlist_text(nlp, text, names=[]):
     return result.strip()
 
 
+def process_texts(nlp, texts):
+    result_texts = []
+    for text in texts:
+        words = [token.lemma_.lower() for token in nlp(text) if
+                 not token.is_stop and not token.is_punct and token.is_alpha]
+        result_texts.append(' '.join(words))
+    return result_texts
+
+
 def clear_text(text):
     text = strip_emoji(text.lower())
     return text.strip()
